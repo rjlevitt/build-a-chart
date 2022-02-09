@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatter That Plot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              salmon: '#ed796c',
+              steelblue: '#5284b6',
+              slategray: '#333333'
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-slategray">
+    <script src="https://unpkg.com/vue@3"></script>
+    <div id="app" >
+      <div class="p-6 space-y-8">
+        <div>
+          <h1 class="uppercase text-salmon text-bold text-xl">{{ message }}</h1>
+        </div>
+        <div>
+          <input v-model="form.name" class="rounded-sm w-[400px] p-1" type="text" placeholder="Enter Chart Title">
+        </div>
+       <div>
+        <h2 class="text-steelblue"> Chart Title: {{form.name}} </h2>
+       </div>
+      </div>
+    </div>
+    <!-- Import App -->
+    <script src="./main.js"></script>
+
+    <!-- Mount App -->
+    <script>
+      const mountedApp = app.mount('#app')
+    </script>
+
+</body>
+</html>
