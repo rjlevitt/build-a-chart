@@ -1,16 +1,10 @@
-// Vue.createApp({
-//     data() {
-//       return {
-//         message: 'Hello Vue!'
-//       }
-//     }
-//   }).mount('#app')
-
 const app = Vue.createApp({
     data(){
         return{
-            form : {
-                name: ''
+            info : {
+                title: '',
+                yxaxis: '',
+                xaxis: ''
             },
             message: "Build a Scatter Plot"
         }

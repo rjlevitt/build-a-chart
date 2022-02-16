@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scatter That Plot</title>
+    <title>Scatter that Data</title>
+
+    <!-- tailwind is "a utility-first CSS framework used to style the application" -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -19,6 +21,9 @@
         }
       }
     </script>
+
+    <!-- chartjs is a "simple yet flexible JavaScript charting for designers & developers" -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body class="bg-slategray">
     <script src="https://unpkg.com/vue@3"></script>
@@ -28,15 +33,23 @@
           <h1 class="uppercase text-salmon text-bold text-xl">{{ message }}</h1>
         </div>
         <div>
-          <input v-model="form.name" class="rounded-sm w-[400px] p-1" type="text" placeholder="Enter Chart Title">
+          <input v-model="info.title" class="rounded-sm w-[400px] p-1" type="text" placeholder="Enter Chart Title">
         </div>
-       <div>
-        <h2 class="text-steelblue"> Chart Title: {{form.name}} </h2>
-       </div>
+        <div>
+          <input v-model="info.yaxis" class="rounded-sm w-[400px] p-1" type="text" placeholder="Enter Y Axis">
+        </div>
+        <div>
+          <input v-model="info.xaxis" class="rounded-sm w-[400px] p-1" type="text" placeholder="Enter X Axis">
+        </div>
       </div>
+      <scatter-plot v-bind:title="info.title" v-bind:yaxis="info.yaxis" v-bind:xaxis="info.xaxis"></scatter-plot>
     </div>
+
     <!-- Import App -->
     <script src="./main.js"></script>
+
+    <!-- Import Components -->
+    <script src="./components/scatterPlot.js"></script>
 
     <!-- Mount App -->
     <script>
