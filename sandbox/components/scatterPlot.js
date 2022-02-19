@@ -1,5 +1,8 @@
 app.component('scatter-plot', {
     props: {
+        test: {
+            type: Array
+        },
         title : {
             type: String
         },
@@ -13,22 +16,26 @@ app.component('scatter-plot', {
     template:
     /*html*/
     `
+    <div>
+        {{ this.test }}
+    </div>
     <div style="height: 300px; max-height: 70vw; width: 800px" class="mx-6 my-8">
         <canvas ref="chartcanvas"></canvas>
     </div>
     `,
     methods: {
         updateChart(){
-            this.chart.options.plugins.title.text = this.title
-            this.chart.options.scales.y.title.text = this.yaxis
-            this.chart.options.scales.x.title.text = this.xaxis
+            console.log(this.test)
+            console.log([...this.test] )
+            this.chart.data.datasets[0].data = [...this.test] 
+            // this.chart.options.plugins.title.text = this.title
+            // this.chart.options.scales.y.title.text = this.yaxis
+            // this.chart.options.scales.x.title.text = this.xaxis
             this.chart.update()
         }
     },
     watch: {
         title: 'updateChart',
-        xaxis: 'updateChart',
-        yaxis: 'updateChart',
     },
     mounted() {
         const data = {
@@ -36,24 +43,17 @@ app.component('scatter-plot', {
             datasets: [
               {
                 label: 'Dataset 1',
-                data: [{x: 16, y: 18}, {x: 6, y: 3}, {x: 15, y: 10}],
+                data: [],
                 radius: 10,
                 borderColor: 'black',
                 backgroundColor: '#5284b6',
-              },
-              {
-                label: 'Dataset 2',
-                data: [{x: 8, y: 22}, {x: 10, y: 2}, {x: 13, y: 20}],
-                radius: 10,
-                borderColor: 'black',
-                backgroundColor: '#ed796c',
               }
             ]
           };
 
         const ctx = this.$refs.chartcanvas.getContext('2d')
         Chart.defaults.color='#e6e6e6'
-        // Chart.defaults.font.family = "'Comic Sans MS', 'Arial', sans-serif"
+        Chart.defaults.font.family = "'Comic Sans MS', 'Arial', sans-serif"
         this.chart = new Chart(ctx, {
             type: 'scatter',
             data: data,
