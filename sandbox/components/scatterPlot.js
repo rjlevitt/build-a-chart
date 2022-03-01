@@ -17,25 +17,20 @@ app.component('scatter-plot', {
     /*html*/
     `
     <div>
-        {{ this.test }}
-    </div>
-    <div style="height: 300px; max-height: 70vw; width: 800px" class="mx-6 my-8">
-        <canvas ref="chartcanvas"></canvas>
+        <button type="submit" v-on:click="updateChart" class="bg-steelblue p-2 rounded-lg hover:bg-salmon text-white">Plot</button>
+        <div style="height: 300px; max-height: 70vw; width: 800px" class="mx-6 my-8">
+            <canvas ref="chartcanvas"></canvas>
+        </div>
     </div>
     `,
     methods: {
         updateChart(){
-            console.log(this.test)
-            console.log([...this.test] )
             this.chart.data.datasets[0].data = [...this.test] 
-            // this.chart.options.plugins.title.text = this.title
-            // this.chart.options.scales.y.title.text = this.yaxis
-            // this.chart.options.scales.x.title.text = this.xaxis
+            this.chart.options.plugins.title.text = this.title
+            this.chart.options.scales.y.title.text = this.yaxis
+            this.chart.options.scales.x.title.text = this.xaxis
             this.chart.update()
         }
-    },
-    watch: {
-        title: 'updateChart',
     },
     mounted() {
         const data = {
