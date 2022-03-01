@@ -15,7 +15,8 @@
             colors: {
               salmon: '#ed796c',
               steelblue: '#5284b6',
-              slategray: '#333333'
+              slategray: '#333333',
+              dark: '#171717'
             }
           }
         }
@@ -28,27 +29,35 @@
 <body class="bg-slategray">
     <script src="https://unpkg.com/vue@3"></script>
     <div id="app" class="p-4 container mx-auto">
-      <div class="space-y-8">
+      <h1 class="uppercase text-salmon text-bold text-xl">Set Labels</h1>
+      <div class="space-y-4">
         <div>
-          <h1 class="uppercase text-salmon text-bold text-xl">{{ message }}</h1>
+          <input v-model="info.title" class="rounded-md w-[400px] p-1" type="text" placeholder="Enter Chart Title">
         </div>
         <div>
-          <input v-model="info.title" class="rounded-sm w-[400px] p-1" type="text" placeholder="Enter Chart Title">
+          <input v-model="info.xaxis" class="rounded-md w-[400px] p-1" type="text" placeholder="Enter X Axis">
         </div>
         <div>
-          <input v-model="info.yaxis" class="rounded-sm w-[400px] p-1" type="text" placeholder="Enter Y Axis">
-        </div>
-        <div>
-          <input v-model="info.xaxis" class="rounded-sm w-[400px] p-1" type="text" placeholder="Enter X Axis">
+          <input v-model="info.yaxis" class="rounded-md w-[400px] p-1" type="text" placeholder="Enter Y Axis">
         </div>
       </div>
-      <div>
-        <input v-model="xvalue" type="number" placeholder="Enter X value">
-        <input  v-model="yvalue" type="number" placeholder="Enter Y value">
+      <div class="mt-6">
+        <h2 class="uppercase text-salmon text-bold text-xl">Enter Data</h2>
+        <input v-model="xvalue" type="number" class="rounded-md p-1 w-[190px] mr-[20px]" placeholder="Enter X value">
+        <input  v-model="yvalue" type="number" class="rounded-md p-1 w-[190px] mr-[20px]" placeholder="Enter Y value">
         <button type="submit" v-on:click="addToData" class="bg-steelblue p-2 rounded-lg hover:bg-salmon text-white">Add Data</button>
       </div>
-      <div class="text-steelblue text-bold text-xl" >
-        {{ chartData }}
+      <div class="text-white mt-8">
+        <table v-if="chartData.length > 0" class="table-fixed min-w-[500px] text-center border border-dark">
+          <tr v-if="info.yaxis||info.xaxis" class="bg-dark">
+            <th class="border border-dark min-w-[250px]">{{ info.xaxis }}</th>
+            <th class="border border-dark min-w-[250px]">{{ info.yaxis }}</th>
+          </tr>
+          <tr v-for="data in chartData">
+            <td class="border border-dark min-w-[250px]">{{ data.x }}</td>
+            <td class="border border-dark min-w-[250px]">{{ data.y }}</td>
+          </tr>
+        </table>
       </div>
       <scatter-plot :test="chartData" :title="info.title" :yaxis="info.yaxis" v-bind:xaxis="info.xaxis"></scatter-plot>
     </div>

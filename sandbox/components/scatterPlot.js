@@ -16,7 +16,7 @@ app.component('scatter-plot', {
     template:
     /*html*/
     `
-    <div>
+    <div class="text-center mt-16">
         <button type="submit" v-on:click="updateChart" class="bg-steelblue p-2 rounded-lg hover:bg-salmon text-white">Plot</button>
         <div style="height: 300px; max-height: 70vw; width: 800px" class="mx-6 my-8">
             <canvas ref="chartcanvas"></canvas>
@@ -41,7 +41,7 @@ app.component('scatter-plot', {
                 data: [],
                 radius: 10,
                 borderColor: 'black',
-                backgroundColor: '#5284b6',
+                backgroundColor: '#ed796c',
               }
             ]
           };
