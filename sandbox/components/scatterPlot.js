@@ -17,7 +17,6 @@ app.component('scatter-plot', {
     /*html*/
     `
     <div class="text-center mt-16">
-        <button type="submit" v-on:click="updateChart" class="bg-steelblue p-2 rounded-lg hover:bg-salmon text-white">Plot</button>
         <div style="height: 300px; max-height: 70vw; width: 800px" class="mx-6 my-8">
             <canvas ref="chartcanvas"></canvas>
         </div>
@@ -31,6 +30,14 @@ app.component('scatter-plot', {
             this.chart.options.scales.x.title.text = this.xaxis
             this.chart.update()
         }
+    },
+    watch: {
+        title: "updateChart",
+        xaxis: "updateChart",
+        yaxis: "updateChart",
+        test: { 
+            handler: "updateChart",
+            deep: true }
     },
     mounted() {
         const data = {
@@ -48,7 +55,7 @@ app.component('scatter-plot', {
 
         const ctx = this.$refs.chartcanvas.getContext('2d')
         Chart.defaults.color='#e6e6e6'
-        Chart.defaults.font.family = "'Comic Sans MS', 'Arial', sans-serif"
+        Chart.defaults.font.family = "'Arial', sans-serif"
         this.chart = new Chart(ctx, {
             type: 'scatter',
             data: data,

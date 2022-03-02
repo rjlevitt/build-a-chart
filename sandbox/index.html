@@ -8,6 +8,7 @@
 
     <!-- tailwind is "a utility-first CSS framework used to style the application" -->
     <script src="https://cdn.tailwindcss.com"></script>
+  
     <script>
       tailwind.config = {
         theme: {
@@ -28,6 +29,8 @@
 </head>
 <body class="bg-slategray">
     <script src="https://unpkg.com/vue@3"></script>
+    <script crossorigin="anonymous"  src="https://unpkg.com/vue-csv-import@4.1.2"></script>
+    
     <div id="app" class="p-4 container mx-auto">
       <h1 class="uppercase text-salmon text-bold text-xl">Set Labels</h1>
       <div class="space-y-4">
@@ -59,6 +62,16 @@
           </tr>
         </table>
       </div>
+      <template>
+        <vue-csv-import
+            v-model="csv"
+            :fields="{name: {required: false, label: 'Name'}, age: {required: true, label: 'Age'}}">
+            <vue-csv-toggle-headers></vue-csv-toggle-headers>
+            <vue-csv-errors></vue-csv-errors>
+            <vue-csv-input></vue-csv-input>
+            <vue-csv-map></vue-csv-map>
+        </vue-csv-import>
+      </template>
       <scatter-plot :test="chartData" :title="info.title" :yaxis="info.yaxis" v-bind:xaxis="info.xaxis"></scatter-plot>
     </div>
 
@@ -70,7 +83,7 @@
 
     <!-- Mount App -->
     <script>
-      const mountedApp = app.mount('#app')
+      const mountedApp = app.use('vue-csv-import').mount('#app')
     </script>
 
 </body>
